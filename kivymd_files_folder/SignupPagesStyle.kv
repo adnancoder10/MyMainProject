@@ -1,0 +1,541 @@
+<SignupPageScreens>:
+    SignupPageScreenManager:
+
+
+<SignupPageScreenManager>:
+    BusinesNameAndCagegoryScreen:
+    BusinesseIndustryAndDescriptionScreen:
+    BusinesseAddressAndImage:
+    ShowFullImageForSingupBusinessProfiles:
+    BusinesseOpenTimeAndCloseTimeAndHoliday:
+    BusinesseOwnerFirstNameAndLastName:
+    BusinessPhoneNumberAndEmailAddress:
+    BusinessSignupOTPVerification:
+    BusinesseUserPasswordScreen:
+    BusinesUsernameScreen:
+
+<BusinesNameAndCagegoryScreen>:
+    name: 'BusinesNameAndCagegoryScreen'
+    FloatLayout:
+        id: BusinesNameAndCagegoryScreenFirstFloatLayout
+        MDIconButton:
+            icon: 'arrow-left'
+            pos_hint: {"x": 0, "top": 1}
+            on_release:
+                app.root.transition.direction = 'right'
+                app.root.current = 'mainPage'
+
+        MDBoxLayout:
+            orientation: 'vertical'
+            size_hint: None, None
+            width: dp(310)
+            height: dp(290)
+            radius: dp(22)
+            pos_hint: {'center_x': 0.5,'center_y': 0.71}
+            id: signupBNACbox
+            spacing: '10dp'
+            
+            MDLabel:
+                text: "Sign up"
+                font_style: "H5"
+                halign: 'center'
+
+            MDLabel:
+                text: "Create a new account for your business"
+                halign: 'center'
+
+            MDTextField:
+                mode: "rectangle"
+                id: SignupBusinessNameInput
+                hint_text: "Enter the name of your business"
+                on_text: root.TextingToSignupBusinessNameInput(SignupBusinessNameInput.text, self.parent)
+                spacing: '10dp'
+ 
+            MDTextField:
+                mode: "rectangle"
+                id: SignupBusinessCategoryInput
+                hint_text: "Enter or select your business category"
+                on_focus: root.show_dropdown(*args)
+                on_text: root.TextingToSignupBusinessCategoryInput(SignupBusinessCategoryInput.text, self.parent)
+
+    
+            MDRectangleFlatIconButton:
+                text: '                                      next                                          '
+                size_hint_x: None
+                pos_hint: {'center_x': 0.5,'center_y': 0.0}
+                height: dp(100)
+                on_press: root.GoingToBusinesseIndustryAndDescriptionScreen(self.parent)
+            MDLabel:
+  
+ 
+
+     
+<BusinesseIndustryAndDescriptionScreen>:
+    name: 'BusinesseIndustryAndDescriptionScreen'
+    FloatLayout:
+        MDIconButton:
+            icon: 'arrow-left'
+            on_release: 
+                root.parent.transition.direction = 'right'
+                root.parent.current = 'BusinesNameAndCagegoryScreen'
+            pos_hint: {"x": 0, "top": 1}
+        MDBoxLayout:
+            orientation: 'vertical'
+            size_hint: None, None
+            # line_color: [0,0,1,1]
+            width: dp(310)
+            height: dp(310)
+            id: signupBIDbox
+            radius: dp(22)
+            pos_hint: {'center_x': 0.5,'center_y': dp(0.71)}
+            spacing: '10dp'
+            MDLabel:
+                text: "Industry & description"
+                font_style: "H5"
+                halign: 'center'
+
+            MDLabel:
+                text: "Enter or select the business industry & write a description"
+                
+
+            MDTextField:
+                mode: "rectangle"
+                id: SignupBusinessIndustryInput
+                hint_text: "Enter or select your business industry"
+                on_focus: root.show_dropdown(*args)
+                on_text: root.TextingToSignupBusinessIndustryInput(SignupBusinessIndustryInput.text, self.parent)
+
+            TextInput:
+                hint_text: "Enter your business description"
+                multiline: True
+                size_hint_y: None
+                height: "100dp"
+                id: SignupBusinessDescriptionInput
+                # background_normal: ""  # Removes default background
+                # background_active: ""  # Removes active background
+                # background_color: (1, 1, 1, 1)  # RGBA color (blue in this case)
+                # foreground_color: (1, 1, 1, 1)  # Text color (white)
+                # use_ime: True
+                # write_tab: False
+                on_text: root.TextingToSignupBusinessDescriptionInput(SignupBusinessDescriptionInput.text, self.parent)
+
+            MDRectangleFlatIconButton:
+                text: '                                      next                                          '
+                size_hint_x: None
+                pos_hint: {'center_x': 0.5,'center_y': 0.0}
+                height: dp(100)
+                on_release: root.GoingToBusinesseAddressAndImageScreen(self.parent)
+
+<BusinesseAddressAndImage>:
+    name: 'BusinesseAddressAndImageScreen'
+    FloatLayout:
+        MDIconButton:
+            icon: 'arrow-left'
+            pos_hint: {"x": 0, "top": 1}
+            on_release: 
+                root.parent.transition.direction = 'right'
+                root.parent.current = 'BusinesseIndustryAndDescriptionScreen'
+        MDBoxLayout:
+            id: boxOFBusinessAddressAndImage
+            orientation: 'vertical'
+            size_hint: None, None
+            width: dp(310)
+            height: dp(290)
+            radius: dp(22)
+            pos_hint: {'center_x': 0.5,'center_y': 0.71}
+            # line_color: [0,0,1,1]
+
+            spacing: '10dp'
+            
+            MDLabel:
+                text: "Address & profile"
+                font_style: "H5"
+                halign: 'center'
+
+            MDLabel:
+                text: "Enter the business address and business profile"
+  
+
+            MDTextField:
+                mode: "rectangle"
+                id: SignupBusinessAddressInput
+                hint_text: "Enter the business address"
+                on_text: root.TextingToSignupBusinessAddressInput(SignupBusinessAddressInput.text, self.parent)
+
+            MDRectangleFlatIconButton:
+                icon: 'file-upload'
+                text: "upload business profiles"
+                size_hint_x: 1
+                id: singupBusinessProfileBotton
+                md_bg_color: (0.2, 0.2, 0,0.1)
+                on_press: bottom_sheet.open()
+                on_release: root.ShowBottomSheet(singupBusinessProfileBotton.text)
+
+
+            MDRectangleFlatIconButton:
+                text: '                                      next                                          '
+                size_hint_x: None
+                pos_hint: {'center_x': 0.5,'center_y': 0.0}
+                height: dp(100)
+                on_release: root.GoingToBusinesseOpenTimeAndCloseTimeAndHolidayScreen(self.parent)
+            MDLabel:
+            # MDLabel:
+    MDBottomSheet:
+        id: bottom_sheet
+        type: "standard"
+        # default_opening_height: smart_tile.y - dp(12)
+        default_opening_height: root.height
+        MDBottomSheetDragHandle:
+            MDBottomSheetDragHandleTitle:
+                text: "bottom sheet"
+
+            MDBottomSheetDragHandleButton:
+                icon: "close"
+                on_release: bottom_sheet.dismiss()
+        MDScrollView:
+            do_scroll_x: False
+                    
+            MDGridLayout:
+                id: boxOfBottomSheet
+                cols: 3
+                size_hint_y: None
+                height: self.minimum_height
+                # width: self.minimum_width
+
+<ShowFullImageForSingupBusinessProfiles>:
+    name: 'ShowFullImageForSingupBusinessProfilesScreen'
+    MDBoxLayout:
+        # id: box
+        orientation: 'vertical'
+        MDTopAppBar:
+            title: ""
+            pos_hint: {"top": 0}
+            elevation: 1
+            md_bg_color: [1, 1, 1, 1]  # White background
+            specific_text_color: [0.0, 0.0, 0, 1]  # Black title text
+            left_action_items: [["arrow-left", root.imageIsNotGoodForBuinessProfiles]]
+            right_action_items: [["check", root.imageIsGoodForBuinessProfiles]]
+        Image:
+            id: ImageOfSingupBusinessProfiles
+            source: ""
+            allow_stretch: True
+
+
+
+<BusinesseOpenTimeAndCloseTimeAndHoliday>:
+    name: 'BusinesseOpenTimeAndCloseTimeAndHolidayScreen'
+    FloatLayout:
+        MDIconButton:
+            icon: 'arrow-left'
+            pos_hint: {"x": 0, "top": 1}
+            on_release: 
+                root.parent.transition.direction = 'right'
+                root.parent.current = 'BusinesseAddressAndImageScreen'
+
+        MDBoxLayout:
+            orientation: 'vertical'
+            size_hint: None, None
+            width: dp(310)
+            height: dp(290)
+            id: box
+            radius: dp(22)
+            pos_hint: {'center_x': 0.5,'center_y': 0.71}
+            # line_color: [0,0,1,1] 
+            spacing: '10dp'
+            
+            MDLabel:
+                text: "Time & Holiday"
+                font_style: "H5"
+                halign: 'center'
+                size_hint_y: 1
+
+            MDLabel:
+                text: "Select the time and holiday of your business"
+                size_hint_y: 1
+
+            MDBoxLayout:
+                orientation: 'horizontal'
+                id: boxOfBusinessOpenTimeCloseTimeAndHolidays
+                size_hint_y: None
+                height: dp(50)
+
+                StackLayout:
+                    orientation: 'tb-lr'
+                    size_hint_y: None
+                    height: dp(50)
+                    MDRectangleFlatIconButton:
+                        icon: 'clock'
+                        text: 'open time'
+                        id: signupOpenTimeButton
+                        on_press: root.PressingOnOpenTimeButton()
+
+                StackLayout:
+                    orientation: 'tb-rl' 
+                    # padding: [10, 0, 10, 10] 
+                    MDRectangleFlatIconButton:
+                        text: 'close time'
+                        icon: 'clock'
+                        id: signupCloseTimeButton
+                        on_press: root.PressingOnCloseTimeButton()
+            MDRectangleFlatIconButton:
+                text: 'press to select holiday'
+                icon: 'chevron-down'
+                id: SingupHolidayButton
+                on_press: root.PressingOnHolidayButton()
+            MDRectangleFlatIconButton:
+                text: 'next'
+                size_hint_x: 1
+                on_release: root.GoingToBusinesseOwnerFirstNameAndLastNameScreen() 
+            MDLabel:
+
+<BusinesseOwnerFirstNameAndLastName>:
+    name: 'BusinesseOwnerFirstNameAndLastNameScreen'
+    FloatLayout:
+        MDIconButton:
+            icon: 'arrow-left'
+            pos_hint: {"x": 0, "top": 1}
+            on_release: 
+                root.parent.transition.direction = 'right'
+                root.parent.current = 'BusinesseOpenTimeAndCloseTimeAndHolidayScreen'
+        MDBoxLayout:
+            orientation: 'vertical'
+            size_hint: None, None
+            width: dp(310)
+            height: dp(290)
+            id: boxSignupBusinessOwnerName
+            radius: dp(22)
+            pos_hint: {'center_x': 0.5,'center_y': 0.71}
+            # line_color: [0,0,1,1] 
+            spacing: '10dp'
+
+            MDLabel:
+                text: "Business owner info"
+                font_style: "H5"
+                halign: 'center'
+                size_hint_y: 1
+
+            MDLabel:
+                text: "Enter the name of the person who owns the business"
+                size_hint_y: 1
+            MDTextField:
+                mode: "rectangle"
+                id: SignupBusinessOwnerFirstName
+                hint_text: "Enter first name"
+                on_text: root.TextingToSignupBusinessOwnerFirstNameInput(self.text, self.parent)
+                spacing: '10dp'
+
+            MDTextField:
+                mode: "rectangle"
+                id: SignupBusinessOwnerLastName
+                hint_text: "Enter last name"
+                on_text: root.TextingToSignupBusinessOwnerLastNameInput(self.text, self.parent)
+                spacing: '10dp'
+    
+            MDRectangleFlatIconButton:
+                text: 'next'
+                size_hint_x: 1
+                pos_hint: {'center_x': 0.5,'center_y': 0.0}
+                on_press: root.GoingToBusinessePhoneNumberAndEmailAddressScreen(self.parent)
+            MDLabel:
+        
+<BusinessPhoneNumberAndEmailAddress>:
+    name: 'BusinessPhoneNumberAndEmailAddressScreen'
+    FloatLayout:
+        MDIconButton:
+            icon: 'arrow-left'
+            pos_hint: {"x": 0, "top": 1}
+            on_release: 
+                root.parent.transition.direction = 'right'
+                root.parent.current = 'BusinesseOwnerFirstNameAndLastNameScreen'
+        MDBoxLayout:
+            orientation: 'vertical'
+            size_hint: None, None
+            width: dp(310)
+            height: dp(310)
+            id: boxSignupBusinessPAandEA
+            radius: dp(22)
+            pos_hint: {'center_x': 0.5,'center_y': 0.71}
+            # line_color: [0,0,1,1] 
+            spacing: '10dp'
+
+            MDLabel:
+                text: "Phone Number & Email Address"
+                font_style: "H5"
+                halign: 'center'
+                size_hint_y: 1
+
+            MDLabel:
+                text: "Enter your phone number and email address for business communication"
+                size_hint_y: 1
+            MDTextField:
+                mode: "rectangle"
+                id: SignupBusinessPhoneNumber
+                hint_text: "Enter your phone number for business"
+                on_text: root.TextingToSignupBusinessPhoneNumberInput(self.text, self.parent)
+                spacing: '10dp'
+
+            MDTextField:
+                mode: "rectangle"
+                id: SignupBusinessEmailAddress
+                hint_text: "Enter your phone email for business"
+                on_text: root.TextingToSignupBusinessEmailAddressInput(self.text, self.parent)
+                spacing: '10dp'
+    
+            MDRectangleFlatIconButton:
+                text: 'next'
+                size_hint_x: 1
+                pos_hint: {'center_x': 0.5,'center_y': 0.0}
+                on_press: root.GoingToBusinessSignupOTPVerificationScreen(self.parent)
+            MDLabel:
+
+<BusinessSignupOTPVerification>:
+    name: 'BusinessSignupOTPVerificationScreen'
+    FloatLayout:
+        MDIconButton:
+            icon: 'arrow-left'
+            pos_hint: {"x": 0, "top": 1}
+            on_release: 
+                root.parent.transition.direction = 'right'
+                root.parent.current = 'BusinessPhoneNumberAndEmailAddressScreen'
+        MDBoxLayout:
+            orientation: 'vertical'
+            size_hint: None, None
+            width: dp(310)
+            height: dp(290)
+            id: boxPHAndEAOTP
+            radius: dp(22)
+            pos_hint: {'center_x': 0.5,'center_y': 0.71}
+            # line_color: [0,0,1,1] 
+            spacing: '10dp'
+
+            MDLabel:
+                text: "OTP verification"
+                font_style: "H5"
+                halign: 'center'
+                size_hint_y: 1
+
+            MDLabel:
+                text: "Enter the OTP code received on your email and phone number"
+                size_hint_y: 1
+
+            MDTextField:
+                mode: "rectangle"
+                id: SignupBusinessEmailVerificationCode
+                hint_text: "Enter email verification code"
+                on_text: root.TextingToSignupBusinessEmailVerificationCodeInput(self.text, self.parent)
+                spacing: '10dp'
+
+            MDTextField:
+                mode: "rectangle"
+                id: SignupBusinessPhoneNumberVerificationCode
+                hint_text: "Enter phone number verification code"
+                on_text: root.TextingToSignupBusinessPhoneNumberVerificationCodeInput(self.text, self.parent)
+                spacing: '10dp'
+    
+            MDRectangleFlatIconButton:
+                text: 'next'
+                size_hint_x: 1
+                pos_hint: {'center_x': 0.5,'center_y': 0.0}
+                on_press: root.GoingToSingupBusinesseUserPasswordScreen(self.parent)
+            MDLabel:
+        
+<BusinesseUserPasswordScreen>:
+    name: 'BusinesseUserPasswordScreen'
+    FloatLayout:
+        MDIconButton:
+            icon: 'arrow-left'
+            pos_hint: {"x": 0, "top": 1}
+            on_release: 
+                root.parent.transition.direction = 'right'
+                root.parent.current = 'BusinessSignupOTPVerificationScreen'
+        MDBoxLayout:
+            orientation: 'vertical'
+            size_hint: None, None
+            width: dp(310)
+            height: dp(310)
+            id: boxSignupPassword
+            radius: dp(22)
+            pos_hint: {'center_x': 0.5,'center_y': 0.71}
+            # line_color: [0,0,1,1] 
+            spacing: '10dp'
+
+            MDLabel:
+                text: "Password"
+                font_style: "H5"
+                halign: 'center'
+                size_hint_y: 1
+
+            MDLabel:
+                text: "Enter a secure password that's impossible to guess!"
+                size_hint_y: 1
+
+            MDTextField:
+                mode: "rectangle"
+                id: SignupBusinessUserPassword
+                hint_text: "Enter your password"
+                on_text: root.TextingToSignupSignupBusinessUserPasswordInput(self.text, self.parent)
+                spacing: '10dp'
+
+            MDTextField:
+                mode: "rectangle"
+                id: SignupBusinessUserConfirmPassword
+                hint_text: "Confirm your password"
+                on_text: root.TextingToSignupSignupBusinessUserConfirmPasswordInput(self.text, self.parent)
+                spacing: '10dp'
+    
+            MDRectangleFlatIconButton:
+                text: 'next'
+                size_hint_x: 1
+                pos_hint: {'center_x': 0.5,'center_y': 0.0}
+                on_press: root.GoingToSingupBusinesseUsernameScreen(self.parent)
+            MDLabel:
+        
+<BusinesUsernameScreen>:
+    name: 'BusinesUsernameScreen'
+    FloatLayout:
+        MDIconButton:
+            icon: 'arrow-left'
+            pos_hint: {"x": 0, "top": 1}
+            on_release: 
+                root.parent.transition.direction = 'right'
+                root.parent.current = 'BusinesseUserPasswordScreen'
+
+        MDBoxLayout:
+            orientation: 'vertical'
+            size_hint: None, None
+            width: dp(310)
+            height: dp(210)
+            id: boxSignupBusinessUsername
+            radius: dp(22)
+            pos_hint: {'top': 0.9,'center_x': 0.5}
+            # pos_hint: {,'center_y': 0.7}
+            # line_color: [0,0,1,1] 
+            spacing: '13dp'
+
+            MDLabel:
+                text: "Username"
+                font_style: "H5"
+                halign: 'center'
+                size_hint_y: 0.7
+
+            MDLabel:
+                text: "Enter Your Username to Get Started with Your Profile"
+                size_hint_y: 0.1
+
+
+            MDTextField:
+                mode: "rectangle"
+                id: SignupBusinessUserUsername
+                hint_text: "Enter Your Username"
+
+    
+            MDRectangleFlatIconButton:
+                text: 'create account'
+                size_hint_x: 1
+                pos_hint: {'center_x': 0.5,'center_y': 0.0}
+                on_release: root.UserPressOnSigupCreateAccount(self.parent)
+      
+            MDLabel:
+                size_hint_y: 0.1
+
+

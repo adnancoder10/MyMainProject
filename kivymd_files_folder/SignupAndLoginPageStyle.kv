@@ -1,0 +1,44 @@
+<SignupAndLoginPage>: 
+    MDBoxLayout:
+        orientation: 'vertical'
+        # line_color: [0,0,1,1]
+        size_hint: None, None
+        width: dp(335)
+        height: dp(290)
+        radius: dp(22)
+        pos_hint: {'center_x': 0.5,'center_y': 0.6}
+        spacing: '10dp'
+
+        MDLabel:
+            text: "Log in"
+            font_style: "H4"
+            halign: 'center'
+
+        MDLabel:
+
+        MDTextField:
+            mode: "rectangle"
+            hint_text: 'Enter phone number or email'
+
+        MDTextField:
+            mode: "rectangle"
+            hint_text: 'Enter password'  
+
+        # MDLabel:
+        MDRectangleFlatIconButton:
+            text: '                                     Log in                                                '
+            pos_hint: {'center_x': 0.5,'center_y': 0.5}
+        
+
+        MDLabel:
+            text: "________or________"
+            halign: 'center'
+        MDRectangleFlatIconButton:
+            text: '                                   Sign up                                              '
+            pos_hint: {'center_x': 0.5,'center_y': 0.5}
+            on_release: 
+                app.root.transition.direction = 'left'
+                app.root.current = 'SignupPageScreens'
+
+
+

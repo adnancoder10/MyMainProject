@@ -1,0 +1,34 @@
+<HomePage>:
+    BoxLayout:
+        orientation: 'vertical'
+
+        
+        MDTopAppBar:
+            title: "MyMainApp"
+            pos_hint: {"top": 0}
+            elevation: 1
+            md_bg_color: [1, 1, 1, 1]  # White background
+            specific_text_color: [0.0, 0.0, 0, 1]  # Black title text
+            left_action_items: [["/home/linux/Desktop/MyMain_Project/images_folder/icon-modified.png", root.on_custom_icon_click]]
+            right_action_items: [["magnify", root.on_custom_icon_click]]
+            # size_hint_y: dp(.1)
+            # padding: [0, 0, dp(5), dp(20)] 
+        # MDTabs:
+        #     id: tabs
+        #     text_color_normal: [0, 0, 0, 1]
+        #     text_color_active: [0, 0, 0, 1]
+        #     background_color: [1, 1, 1, 0]
+        #     swipe_to_switch_tabs: False
+        #     HomePageBusinessTab:
+        #     HomePageProductsTab:
+        MDLabel:
+            text: "Home page"
+                
+
+
+
+
+
+
+
+

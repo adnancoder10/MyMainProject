@@ -1,0 +1,38 @@
+<MainPage>:
+    MDBoxLayout:
+        orientation: 'vertical'
+        
+        MDBottomNavigation:
+            panel_color: .0, .1, .1, .1
+            # size_hint_y: None
+            # height: dp(33)
+            # Add a NavigationItem for each Navigation.
+            MDBottomNavigationItem:
+                name: "HomePage"
+                text: "Home"
+                icon: "home"
+                
+                # Add Contents here
+                HomePage:
+                
+                                    
+            MDBottomNavigationItem:
+                name: 'BunindessesPage'
+                text: 'bussineses'
+                icon: '/home/linux/Desktop/MyMain_Project/icon_folder/bus.svg'
+                icon: 'shopping-search'
+
+                BusinessesPage:
+            
+            MDBottomNavigationItem:
+                name: 'ProductesPage'
+                text: 'Productes'
+                icon: 'gift-open'
+                ProductesPage:
+
+            MDBottomNavigationItem:
+                id: AccountPage
+                name: 'AccountPage'
+                text: 'Account'
+                icon: 'account'
+                AccountPageScreenManager:
