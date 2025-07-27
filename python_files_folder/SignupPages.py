@@ -1465,7 +1465,7 @@ class BusinesUsernameScreen(Screen):
                 files = {
                     "Signupbusiness_profile": (file_path, Profile, mime_type)
                     }
-                res = requests.post('http://localhost:8000/api', data=data, files=files)
+                res = requests.post('http://localhost:8000/signup/api', data=data, files=files)
                 print("Status:", res.status_code)
                 # print("Response:", res.text)
                 if 'TheErrorsOfServerForSignup' in json.loads(res.text):
